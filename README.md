@@ -1,9 +1,11 @@
 # CorpseReborn
-This is a port of the plugin Corpses by Virizion (https://www.spigotmc.org/resources/corpses.1817/) that myself and others have ported to Spigot 1.7.10-1.16.4
+This is a fork of the port of the plugin Corpses by Virizion (https://www.spigotmc.org/resources/corpses.1817/) and Eric.
 
-Link to my plugin: https://www.spigotmc.org/resources/corpsereborn.29875/
+Ported the 1.7.10 version to Cauldron. You need a Spigot server jar and a SRG jar to build (no time to messing up buildscript with IDEA). 
 
-Premade addons that I have made for people: https://github.com/egold555/CorpseReborn-Add-ons
+Link to original plugin: https://www.spigotmc.org/resources/corpsereborn.29875/
+
+Premade addons that Eric have made for people: https://github.com/egold555/CorpseReborn-Add-ons
 
 Stats page: http://web2.golde.org/files/spigot/CorpseReborn/stats/
 
