@@ -14,9 +14,8 @@ import org.golde.bukkit.corpsereborn.nms.Corpses.CorpseData;
 
 public class SpawnCorpse implements CommandExecutor {
 
-	public boolean onCommand(CommandSender sender, Command cmd,
-			String commandLabel, String[] args) {
-		try{
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+		try {
 			CorpseData data;
 			if (!(sender instanceof Player)) {
 				sender.sendMessage(ChatColor.RED
@@ -41,7 +40,6 @@ public class SpawnCorpse implements CommandExecutor {
 							+ " is not online!");
 					return true;
 				}
-
 				data = Main.getPlugin().corpses.spawnCorpse(p, null, p.getLocation(), Util.makeNiceInv(p), 0).setSelectedSlot(p.getInventory().getHeldItemSlot());
 				sender.sendMessage(ChatColor.GREEN + "Spawned corpse of "
 						+ p.getName() + "!");
@@ -50,7 +48,7 @@ public class SpawnCorpse implements CommandExecutor {
 				sender.sendMessage(ChatColor.RED + "Correct Usage: /"
 						+ commandLabel + " [Player]");
 			}
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			new ReportError(ex, sender);
 		}
 		return true;

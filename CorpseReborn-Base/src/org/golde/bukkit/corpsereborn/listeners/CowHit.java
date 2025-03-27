@@ -1,6 +1,5 @@
 package org.golde.bukkit.corpsereborn.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -14,9 +13,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.golde.bukkit.corpsereborn.Main;
-import org.golde.bukkit.corpsereborn.ServerVersion;
 import org.golde.bukkit.corpsereborn.Util;
 import org.golde.bukkit.corpsereborn.dump.ReportError;
 import org.golde.bukkit.corpsereborn.nms.Corpses.CorpseData;
@@ -47,10 +44,9 @@ public class CowHit implements Listener{
 	@EventHandler(priority=EventPriority.LOW)
 	public void rightClick(PlayerInteractAtEntityEvent e){
 		try{
-			if(Main.serverVersion.getNiceVersion().compareTo(ServerVersion.v1_10 ) < 0 || e.getHand().equals(EquipmentSlot.HAND)){
-				if(handle(e.getPlayer(), e.getRightClicked(), TypeOfClick.RIGHT_CLICK)){
-					e.setCancelled(true);
-				}
+			//if(Main.serverVersion.getNiceVersion().compareTo(ServerVersion.v1_10 ) < 0 || e.getHand().equals(EquipmentSlot.HAND)){}
+			if(handle(e.getPlayer(), e.getRightClicked(), TypeOfClick.RIGHT_CLICK)){
+				e.setCancelled(true);
 			}
 		}catch(Exception ex){
 			new ReportError(ex);

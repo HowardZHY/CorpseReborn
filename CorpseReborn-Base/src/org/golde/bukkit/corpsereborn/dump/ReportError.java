@@ -49,9 +49,6 @@ public class ReportError {
 			sender.sendMessage(ChatColor.RED + "Failed to dump, please check the console for more information.");
 			e.printStackTrace();
 		}
-
-		
-		
 	}
 }
 

@@ -12,9 +12,8 @@ import org.golde.bukkit.corpsereborn.nms.Corpses.CorpseData;
 public class ResendCorpses implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(final CommandSender sender, Command arg1, String arg2,
-			String[] arg3) {
-		try{
+	public boolean onCommand(final CommandSender sender, Command arg1, String arg2, String[] arg3) {
+		try {
 			
 			if (!sender.hasPermission("corpses.resend")) {
 				sender.sendMessage(ChatColor.RED
