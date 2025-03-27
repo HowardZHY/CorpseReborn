@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="srg">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/srg.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/libs/srg.jar!/" />
+    </SOURCES>
+  </library>
+</component>

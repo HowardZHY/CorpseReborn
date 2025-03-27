@@ -1,6 +1,6 @@
 .settings/
 bin/
-
+libs/
 DUMMY/
 Export/*
 !Export/mergejars.bat
