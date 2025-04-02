@@ -2,6 +2,7 @@ package org.golde.bukkit.corpsereborn.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -19,37 +20,34 @@ public class PlayerDeath implements Listener {
 
 	@EventHandler(priority=EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerDeath(PlayerDeathEvent e) {
-		try{
-			
-			if(ConfigData.getDamageCausesThatDontCauseACorpse().contains(e.getEntity().getLastDamageCause().getCause())) {
-				return;
+		try {
+			Player p = e.getEntity();
+			if (p.getLastDamageCause() != null) {
+				if (ConfigData.getDamageCausesThatDontCauseACorpse().contains(p.getLastDamageCause().getCause())) {
+					return;
+				}
 			}
-			
-			if (ConfigData.isOnDeath() && Util.playerInCorrectWorld(e.getEntity())) {
+			if (ConfigData.isOnDeath() && Util.playerInCorrectWorld(p)) {
 				CorpseData data;
-				PlayerInventoryClone inv = new PlayerInventoryClone(e.getEntity(), e.getDrops());
-				
+				PlayerInventoryClone inv = new PlayerInventoryClone(p, e.getDrops());
 				int facing = yawToFacing(e.getEntity().getLocation().getYaw());
-				
-				data = Main.getPlugin().corpses.spawnCorpse(e.getEntity(), null, offsetLocationFacing(e.getEntity().getLocation(), facing), inv.toInventory(), facing).setSelectedSlot(e.getEntity().getInventory().getHeldItemSlot());
-				
+				data = Main.getPlugin().corpses.spawnCorpse(e.getEntity(), null, offsetLocationFacing(p.getLocation(), facing), inv.toInventory(), facing).setSelectedSlot(p.getInventory().getHeldItemSlot());
 				CorpseSpawnEvent cse = new CorpseSpawnEvent(data, false);
 				Util.callEvent(cse);
-				if(cse.isCancelled()){
+				if (cse.isCancelled()) {
 					Main.getPlugin().corpses.removeCorpse(data);
-				}else{
+				} else {
 					if (ConfigData.hasLootingInventory()) {		
 						e.getDrops().clear();
 					}
 				}
 			}
-			
 			// For each corpse, remove player from view of that corpse.
 			//in therory fixing a bug. Realy not sure
 			for (CorpseData cd:Main.getPlugin().corpses.getAllCorpses()) {
 				cd.removeFromMap(e.getEntity());
 			}
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			new ReportError(ex);
 		}
 	}
@@ -87,9 +85,7 @@ public class PlayerDeath implements Listener {
 		
 		return facing;
 	}
-	
-	private final float offset = 2f;
-	
+
 	//NON CLIPABLE LOCATION?!?!?
 	private Location offsetLocationFacing(Location loc, int facing) { //TODO: Fix
 		
@@ -97,6 +93,7 @@ public class PlayerDeath implements Listener {
 		if(Main.getPlugin().isDev) {
 			Bukkit.broadcastMessage("LOC: " + loc);
 		}
+		float offset = 2f;
 		newLoc = newLoc.add(0, 0, offset);
 
 		if(Main.getPlugin().isDev) {
